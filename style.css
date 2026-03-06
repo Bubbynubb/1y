@@ -4,13 +4,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* A nice, modern font */
     transition: background 1s ease;
     background-color: #f0f0f0;
+    overflow: hidden; /* Prevents scrollbars during transition */
 }
 
 .gradient-bg {
-    background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
 }
 
 .container {
@@ -30,13 +31,27 @@ button {
     padding: 15px 30px;
     margin: 10px;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px; /* Rounded buttons */
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.btn-left { background-color: #ccc; }
-.btn-right { background-color: #ff4d6d; color: white; }
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.btn-left {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.btn-right {
+    background-color: #ff4d6d;
+    color: white;
+}
 
 /* The Heart */
 .heart {
@@ -46,6 +61,11 @@ button {
     background-color: #ff4d6d;
     transform: rotate(-45deg);
     margin: 50px auto;
+    /* Added flexbox to center the content inside the heart */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
 .heart::before, .heart::after {
@@ -60,15 +80,29 @@ button {
 .heart::before { top: -100px; left: 0; }
 .heart::after { left: 100px; top: 0; }
 
-/* The Text inside the heart */
-.heart-text {
-    position: absolute;
+/* The Text Container inside the heart */
+.heart-text-container {
+    /* Since the heart is rotated -45deg, we rotate the content back 45deg */
     transform: rotate(45deg);
-    width: 100%;
-    top: 40%;
-    left: 40%;
+    display: flex;
+    flex-direction: column; /* Stack name and date vertically */
+    justify-content: center;
+    align-items: center;
     color: white;
-    font-weight: bold;
-    font-size: 1.2rem;
     z-index: 10;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3); /* Adds readability */
+    width: 150%; /* Make sure text has room to breathe */
+    pointer-events: none; /* Text won't interfere with clicks */
+}
+
+.heart-text-name {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.heart-text-date {
+    font-weight: normal;
+    font-size: 1rem;
+    opacity: 0.9;
 }
